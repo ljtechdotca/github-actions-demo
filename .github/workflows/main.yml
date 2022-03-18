@@ -16,6 +16,8 @@ jobs:
         dotnet-version: 6.0.200
     - name: Publish .NET Core Project
       run: dotnet publish github-actions.csproj -c Release -o release --nologo
+    - name: Change base-tag in index.html from / to github-actions-demo
+      run: sed -i 's/<base href="\/" \/>/<base href="\/github-actions-demo\/" \/>/g' release/wwwroot/index.html
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
